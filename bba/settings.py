@@ -63,6 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'swingtime.context_processors.current_datetime',
             ],
         },
     },
@@ -77,7 +78,7 @@ WSGI_APPLICATION = 'bba.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME':str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
