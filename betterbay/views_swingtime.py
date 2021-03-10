@@ -4,6 +4,7 @@ import logging
 from datetime import datetime, timedelta, time
 from dateutil import parser
 from django import http
+from django.contrib.auth.decorators import login_required
 from django.db import models
 from django.template.context import RequestContext
 from django.shortcuts import get_object_or_404, render
@@ -87,7 +88,7 @@ def event_view(
     }
     return render(request, template, data)
 
-
+@login_required
 def occurrence_view(
     request,
     event_pk,
@@ -123,6 +124,7 @@ def occurrence_view(
     return render(request, template, {'occurrence': occurrence, 'form': form})
 
 
+@login_required
 def add_event(
     request,
     template='add_event.html',

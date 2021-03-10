@@ -10878,6 +10878,15 @@
                                                         <span class="brz-span">Calendar</span>
                                                     </a>
                                                 </li>
+                                                <li class="brz-menu__item">
+                                                    {% if user.is_authenticated %}
+                                                        <div>
+                                                            Hi {{ user.first_name }}! <a class="brz-a brz-anchor menu-item menu-item-type-custom menu-item-object-custom" href="{% url 'logout' %}">Log Out</a></p>
+                                                        </div>
+                                                    {% else %}
+                                                        <a class="brz-a brz-anchor menu-item menu-item-type-custom menu-item-object-custom" href="{% url 'login' %}">Log In</a>
+                                                    {% endif %}
+                                                </li>
                                             </ul>
                                         </nav>
                                         <div class="brz-mm-menu__icon">
