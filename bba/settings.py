@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import datetime
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'betterbay.apps.BetterbayConfig'
+    'betterbay.apps.BetterbayConfig',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +123,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
+
+SWINGTIME = {
+    'TIMESLOT_START_TIME': datetime.time(14),
+    'TIMESLOT_END_TIME_DURATION': datetime.timedelta(hours=6.5)
+}

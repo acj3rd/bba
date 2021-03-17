@@ -15,6 +15,7 @@ from dateutil import rrule
 from .conf import swingtime_settings
 from .models import EventType, Occurrence
 
+from django.conf import settings
 
 def time_delta_total_seconds(time_delta):
     """

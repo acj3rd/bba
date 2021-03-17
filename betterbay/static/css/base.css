@@ -1,0 +1,155 @@
+body{
+	padding-bottom: 1em;
+	margin-top: 10px;
+}
+
+button{
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+}
+.padding-top{
+	padding-top: 1em;
+}
+
+.padding-bottom{
+	padding-bottom: 1em;
+}
+
+mark{
+	background: #CAEEA4;
+	color: black;
+}
+
+.boxed {
+	border: 1px solid black ;
+}
+
+.footer-box {
+	min-height: 5%;
+	position: relative;
+}
+
+.footer-body {
+	overflow: auto;
+	text-align: center;
+	vertical-align: middle;
+	height:50px;
+	margin-top: 7px;
+}
+
+
+.boxed-bottom {
+	border: 1px solid black ;
+	text-align: center;
+	height: 50px;
+}
+
+.essay_box {
+	min-height: 100%;
+	position: relative;
+}
+
+.essay_body {
+	padding-bottom: 40px;
+	overflow: auto;
+	height:550px;
+}
+
+.essay_footnotes {
+	height: 25%;
+	padding-bottom: 40px;
+}
+
+.outer-arrow {
+  display: table;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.middle-arrow {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.right-arrow {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vh-80 { height: 80vh !important; }
+
+/*--------------------------------------------------------------
+# HEADER
+--------------------------------------------------------------*/
+#top-left {
+	z-index: 1;
+}
+
+#top-right{
+	display: inline;
+	vertical-align: middle;
+	float: none;
+}
+
+#search-input{
+	display: flex;
+	border: 1px solid #ccc;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	margin-top: 10px;
+}
+
+#search-input input[type=search]{
+	background-color: rgba(0,0,0,0);
+	border: none;
+	padding: 0 .5em;
+}
+
+#search-input button[type=submit]{
+	background-color: transparent;
+	border: none;
+}
+
+#search-line-1{
+
+}
+
+#header-bottom{
+	padding: 1em 0;
+}
+
+#primary-menu{
+	display: flex;
+	padding: 1em 0 1em 1em;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+#primary-menu ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#primary-menu ul > li{
+	float: left;
+	padding: 0 1em 0 0;
+}
+
+#search_leftPanel {
+  width: 150px;
+  float: left;
+  border-right: 1px solid #666;
+  margin-right: 20px;
+}
+
+#search_rightPanel_center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}

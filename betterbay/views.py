@@ -10,13 +10,31 @@ from django.views.generic import TemplateView
 
 logger = logging.getLogger(__name__)
 
-
 from django.shortcuts import render
+from django.contrib import auth
 
 # Create your views here.
 def index(request):
     """View function for home page of site."""
     return render(request, 'index.html')
+
+def login(request):
+    # if request.user.is_authenticated():
+    #     return redirect('admin_page')
+    #
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            # correct username and password login the user
+            auth.login(request, user)
+            return render(request, 'indexNEW.html')
+        else:
+            return render(request, 'login2.html', {'messages': ['Error wrong username/password']})
+
+    return render(request, 'login2.html')
 
 
 class AISView (TemplateView):
