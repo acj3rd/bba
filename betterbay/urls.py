@@ -21,4 +21,6 @@ urlpatterns = [
     url(r'^calendar/(\d{4})/(0?[1-9]|1[012])/([0-3]?\d)/$',
         views_swingtime.day_view,
         name='bba-daily-view'),
+
+    url(r'^login/$', views.login, name='bba-login')
 ]

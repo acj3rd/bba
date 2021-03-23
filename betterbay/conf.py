@@ -38,5 +38,9 @@ DEFAULT_SETTINGS = {
     'CALENDAR_FIRST_WEEKDAY':  6,
 }
 
-_user_settings = getattr(settings, 'SWINGTIME', {})
-swingtime_settings = SimpleNamespace(**dict(DEFAULT_SETTINGS, **_user_settings))
+SWINGTIME = {
+    'TIMESLOT_START_TIME': datetime.time(14),
+    'TIMESLOT_END_TIME_DURATION': datetime.timedelta(hours=6.5)
+}
+
+swingtime_settings = SimpleNamespace(**dict(DEFAULT_SETTINGS, **SWINGTIME))
