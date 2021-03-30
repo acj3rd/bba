@@ -3,42 +3,105 @@
 
 {% block top_nav %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script>
+  window.console = window.console || function(t) {};
+</script>
 
-    <div id="top-menubar container-fluid">
-        <div class="row-fluid">
-            <div id="logo-name" class="span2 logo-name">
-                <div class="logo-name-container">
-                    <div class=logo-image>
-                        <img src="{% static 'images/BBA-Logo.png' %}" alt="BBA Logo"
-                             style="width:75px;height:75px;"/>
-                    </div>
-                    <div class="logo-text">
-                        Better Bay Alliance
-                    </div>
-                </div>
+
+
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+  <nav class="nav">
+        <div class="container">
+            <div class="logo">
+                <a href="#"><img src="{% static 'images/BBA-Logo.png' %}" alt="BBA Logo"
+                         style="width:75px;height:75px;"/>
+                    Better Bay Alliance</a>
             </div>
-            <div id="bba-top-menu" class="span7 bba-top-menu">
-                <a href="news.html">News</a>
-                <a href="{% url 'bba-monthly-view' current_datetime.year current_datetime.month %}">CALENDAR</a>
-                <a href="about.html">About</a>
+            <div id="mainListDiv" class="main_list">
+                <ul class="navlinks">
+                    <li><a href="{% url 'bba-news' %}">News</a></li>
+                    <li><a href="{% url 'bba-monthly-view' current_datetime.year current_datetime.month %}">Calendar</a>
+                    </li>
+                    <li><a href="about.html">About</a></li>
+                    {% if user.is_authenticated %}
+                        <p class="navbar-text"></p>
+                        <li><a class="bba-top-right-menu" href="{% url 'logout' %}">Hi {{ user.first_name }}! &nbsp;Log Out</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Log In</a></li>
+                    {% endif %}
+                    <li>
+                        <a class="bba-top-right-menu" href="{% url 'bba-search' %}">
+                            <svg class="mk-svg-icon" data-name="mk-icon-search" data-cacheid="icon-605128897bf66"
+                                 style=" height:16px; width: 14.857142857143px; " xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 1664 1792">
+                                <path d="M1152 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"></path>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
             </div>
-        <div class=" span3 bba-top-right-menu">
-                {% if user.is_authenticated %}
-                    Hi {{ user.first_name }}!<a href="{% url 'logout' %}"> &nbsp;Log Out</a></p>
-                {% else %}
-                    <a href="{% url 'login' %}">Log In</a>
-                {% endif %}
-            <svg class="mk-svg-icon" data-name="mk-icon-search" data-cacheid="icon-605128897bf66" style=" height:16px; width: 14.857142857143px; " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 1792"><path d="M1152 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"></path></svg>        </div>
+            <span class="navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
         </div>
-    </div>
+    </nav>
 
 
-
-    </div>
 {% endblock %}
 
 {% block content %}
-    <p></p>
-    <h2> Yup BBA!</h2>
-    <p>Stuff etc etc.</p>
+
+    <section class="home" style="background-image: url('{% static "images/volvo_start2.png"%}')">
+    </section>
+    <div style="height: 1000px">
+        <!-- just to make scrolling effect possible -->
+	    <h2>Our Mission</h2>
+        <p class="myP">
+
+The Better Bay Alliance is a nonprofit organization dedicated to enhancing the boating experience on Narragansett Bay by identifying, communicating, and promoting safety, accessibility, and cooperation while sharing our wonderful natural resource. Through collaboration with governmental, corporate, and private stakeholders, the Better Bay Alliance strives to be a resource for all who which to enjoy the Bay.
+			</p>
+    </div>
+<!-- Jquery needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $('.navTrigger').click(function () {
+            $(this).toggleClass('active');
+            console.log("Clicked menu");
+            $("#mainListDiv").toggleClass("show_list");
+            $("#mainListDiv").fadeIn();
+
+        });
+    </script>
+
+<!-- Function used to shrink nav bar removing paddings and adding black background -->
+    <script>
+        $(window).scroll(function() {
+            if ($(document).scrollTop() > 50) {
+                $('.nav').addClass('affix');
+                console.log("OK");
+            } else {
+                $('.nav').removeClass('affix');
+            }
+        });
+    </script>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+
+
+      <script id="rendered-js" >
+$('.navTrigger').click(function () {
+  $(this).toggleClass('active');
+  console.log("Clicked menu");
+  $("#mainListDiv").toggleClass("show_list");
+  $("#mainListDiv").fadeIn();
+
+});
+//# sourceURL=pen.js
+    </script>
 {% endblock content %}

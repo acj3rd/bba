@@ -8,6 +8,8 @@ from django.urls import reverse
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 
+from taggit.managers import TaggableManager
+
 from .conf import swingtime_settings
 
 __all__ = (
@@ -15,7 +17,8 @@ __all__ = (
     'EventType',
     'Event',
     'Occurrence',
-    'create_event'
+    'create_event',
+    'News'
 )
 
 
@@ -73,7 +76,7 @@ class Event(models.Model):
     class Meta:
         verbose_name = _('event')
         verbose_name_plural = _('events')
-        ordering = ('title', )
+        ordering = ('title',)
 
     def __str__(self):
         return self.title
@@ -206,13 +209,13 @@ class Occurrence(models.Model):
 
 
 def create_event(
-    title,
-    event_type,
-    description='',
-    start_time=None,
-    end_time=None,
-    note=None,
-    **rrule_params
+        title,
+        event_type,
+        description='',
+        start_time=None,
+        end_time=None,
+        note=None,
+        **rrule_params
 ):
     """
     Convenience function to create an ``Event``, optionally create an
@@ -263,3 +266,23 @@ def create_event(
     end_time = end_time or (start_time + swingtime_settings.DEFAULT_OCCURRENCE_DURATION)
     event.add_occurrences(start_time, end_time, **rrule_params)
     return event
+
+
+class News(models.Model):
+    """
+    Class to hold news articles
+    """
+
+    title = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    author = models.CharField(max_length=200)
+    updated_on = models.DateTimeField(auto_now=True)
+    content = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    tags = TaggableManager()
+
+    class Meta:
+        db_table = "news"
+
+    def __str__(self):
+        return self.title

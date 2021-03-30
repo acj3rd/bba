@@ -1,21 +1,28 @@
 # TODO: add copyright header
 
 from django.views import View
-from django.views.generic import TemplateView
 
 import logging
 import sys
 import traceback as tb
 from django.views.generic import TemplateView
 
-logger = logging.getLogger(__name__)
-
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib import auth
 
-# Create your views here.
+from betterbay.models import News as NewsDB
+from taggit.models import Tag
+
+logger = logging.getLogger(__name__)
+
+
 def index(request):
     """View function for home page of site."""
+    return render(request, 'index.html')
+
+
+def search(request):
+    """View function for searching site. (TODO: just return index for now)"""
     return render(request, 'index.html')
 
 def login(request):
@@ -37,7 +44,7 @@ def login(request):
     return render(request, 'login2.html')
 
 
-class AISView (TemplateView):
+class AISView(TemplateView):
     """
     This class handles the display of the AIS page
 
@@ -58,3 +65,48 @@ class AISView (TemplateView):
         except Exception as e:
             exc_type, exc_value, exc_tb = sys.exc_info()
             logger.error(tb.format_exception(exc_type, exc_value, exc_tb))
+
+
+class News(TemplateView):
+    """
+    This class handles the display of news articles
+
+    By default, it handles GET requests and renders the template based on the attribute "template_name".
+    """
+    template_name = "news.html"
+
+    def get(self, *args, **kwargs):
+        """
+        Handle the GET request for the news page
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        news_articles = NewsDB.objects.all()
+        # Show most common tags
+        common_tags = NewsDB.tags.most_common()[:4]
+        context = {
+            'news_articles': news_articles,
+            'common_tags': common_tags,
+        }
+        return render(self.request, 'news.html', context)
+
+
+def detail_view(request, slug):
+    article = get_object_or_404(News, slug=slug)
+    context = {
+        'article': article,
+    }
+    return render(request, 'news.html', context)
+
+
+def tagged(request, slug):
+    tag = get_object_or_404(Tag, slug=slug)
+    common_tags = News.tags.most_common()[:4]
+    articles = News.objects.filter(tags=tag)
+    context = {
+        'tag': tag,
+        'common_tags': common_tags,
+        'articles': articles,
+    }
+    return render(request, 'news.html', context)

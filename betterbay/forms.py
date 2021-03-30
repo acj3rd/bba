@@ -1,6 +1,6 @@
-'''
+"""
 Convenience forms for adding and updating ``Event`` and ``Occurrence``s.
-'''
+"""
 from datetime import datetime, date, time, timedelta
 from django import forms
 from django.forms.utils import to_current_timezone
@@ -104,13 +104,13 @@ def timeslot_options(
     end_delta=swingtime_settings.TIMESLOT_END_TIME_DURATION,
     fmt=swingtime_settings.TIMESLOT_TIME_FORMAT
 ):
-    '''
+    """
     Create a list of time slot options for use in swingtime forms.
 
     The list is comprised of 2-tuples containing a 24-hour time value and a
     12-hour temporal representation of that offset.
 
-    '''
+    """
     dt = datetime.combine(date.today(), time(0))
     dtstart = datetime.combine(dt.date(), start_time)
     dtend = dtstart + end_delta
@@ -129,13 +129,13 @@ def timeslot_offset_options(
     end_delta=swingtime_settings.TIMESLOT_END_TIME_DURATION,
     fmt=swingtime_settings.TIMESLOT_TIME_FORMAT
 ):
-    '''
+    """
     Create a list of time slot options for use in swingtime forms.
 
     The list is comprised of 2-tuples containing the number of seconds since the
     start of the day and a 12-hour temporal representation of that offset.
 
-    '''
+    """
     dt = datetime.combine(date.today(), time(0))
     dtstart = datetime.combine(dt.date(), start_time)
     dtend = dtstart + end_delta
@@ -156,10 +156,10 @@ default_timeslot_offset_options = timeslot_offset_options()
 
 
 class MultipleIntegerField(forms.MultipleChoiceField):
-    '''
+    """
     A form field for handling multiple integers.
 
-    '''
+    """
 
     def __init__(self, choices, size=None, label=None, widget=None):
         widget = widget or forms.SelectMultiple(attrs={'size': size or len(choices)})
@@ -175,11 +175,11 @@ class MultipleIntegerField(forms.MultipleChoiceField):
 
 
 class SplitDateTimeWidget(forms.MultiWidget):
-    '''
+    """
     A Widget that splits datetime input into a SelectDateWidget for dates and
     Select widget for times.
 
-    '''
+    """
     def __init__(self, attrs=None):
         widgets = (
             SelectDateWidget(attrs=attrs),
@@ -383,10 +383,10 @@ class MultipleOccurrenceForm(forms.Form):
 
 
 class EventForm(forms.ModelForm):
-    '''
+    """
     A simple form for adding and updating Event attributes
 
-    '''
+    """
 
     class Meta:
         model = Event
@@ -398,10 +398,10 @@ class EventForm(forms.ModelForm):
 
 
 class SingleOccurrenceForm(forms.ModelForm):
-    '''
+    """
     A simple form for adding and updating single Occurrence attributes
 
-    '''
+    """
 
     start_time = forms.SplitDateTimeField(widget=SplitDateTimeWidget)
     end_time = forms.SplitDateTimeField(widget=SplitDateTimeWidget)
@@ -409,3 +409,5 @@ class SingleOccurrenceForm(forms.ModelForm):
     class Meta:
         model = Occurrence
         fields = "__all__"
+
+
