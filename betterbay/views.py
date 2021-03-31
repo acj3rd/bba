@@ -93,11 +93,17 @@ class News(TemplateView):
 
 
 def detail_view(request, slug):
-    article = get_object_or_404(News, slug=slug)
+    """
+    GEt the specific News article
+    :param request:
+    :param slug:
+    :return:
+    """
+    article = get_object_or_404(NewsDB, slug=slug)
     context = {
         'article': article,
     }
-    return render(request, 'news.html', context)
+    return render(request, 'news_article.html', context)
 
 
 def tagged(request, slug):

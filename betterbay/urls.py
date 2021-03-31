@@ -22,8 +22,8 @@ urlpatterns = [
         views_swingtime.day_view,
         name='bba-daily-view'),
     url(r'^news', views.News.as_view(), name='bba-news'),
-    path('news_article/<slug:slug>/', views.detail_view, name="detail"),
-    path('news_tag/<slug:slug>/', views.tagged, name="tagged"),
+    path('^news_article/<slug:slug>/', views.detail_view, name="detail"),
+    path('^news_tag/<slug:slug>/', views.tagged, name="tagged"),
 
     url(r'^login/$', views.login, name='bba-login'),
     url(r'^search/$', views.search, name='bba-search')

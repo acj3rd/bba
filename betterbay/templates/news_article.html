@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block top_nav %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% include 'nav_template.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="home" style="background-image: url('{% static "images/volvo_start2.png"%}')">
+    </section>
+    <div style="height: 1000px">
+   <div class="container pt-5">
+        <div class="row mb-2 posts">
+            <div class="col-md-6">
+                <div class="cards">
+                    <div class="row no-gutters border rounded  flex-md-row mb-4 shadow-sm h-md-250">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <h3 class="my-1">{{ article.title }}</h3>
+                           <span>{{ article.content }}</span>
+                            <div style="display:flex">
+                                {% for tag in article.tags.all %}
+                                    <a href="{% url 'tagged' tag.slug %}"
+                                       class="mr-1 badge badge-info">#{{ tag }}</a>
+                                {% endfor %}
+                            </div>
+                            <p class="mb-auto">{{ news_article.description }}</p>
+                            <p class="mb-auto text-muted">{{ news_article.published }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+
+
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+{% endblock content %}
