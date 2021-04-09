@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block top_nav %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% include 'nav_template.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <section class="home" style="background-image: url('{% static "images/volvo_start2.png" %}')">
+    </section>
+    <div style="height: 1000px">
+        <div class="container pt-5">
+            <!-- just to make scrolling effect possible -->
+            <h2>Search Results</h2>
+            <div class="row mb-2 posts">
+            {% if search_results|length == 0 %}
+            <h3> No Results found.</h3>
+            {% else %}
+                {% for search_result in search_results %}
+                    <div class="col-md-6">
+                        <div class="cards">
+                            <div class="row no-gutters border rounded  flex-md-row mb-4 shadow-sm h-md-250">
+                                <div class="col p-4 d-flex flex-column position-static">
+                                    <h3 class="my-1"><a
+                                            href="{% url 'news_detail' search_result.slug %}">{{ search_result.title }}</a>
+                                    </h3>
+                                    <p class="myP">
+                                        <span>{{ search_result.content|truncatechars:100 }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script>
+        window.console = window.console || function (t) {
+        };
+    </script>
+
+
+
+    <script>
+        if (document.location.search.match(/type=embed/gi)) {
+            window.parent.postMessage("resize", "*");
+        }
+    </script>
+{% endblock content %}

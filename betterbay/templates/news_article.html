@@ -19,10 +19,12 @@
                     <div class="row no-gutters border rounded  flex-md-row mb-4 shadow-sm h-md-250">
                         <div class="col p-4 d-flex flex-column position-static">
                             <h3 class="my-1">{{ article.title }}</h3>
+                        <p class="myP">
                            <span>{{ article.content }}</span>
+                        </p>
                             <div style="display:flex">
                                 {% for tag in article.tags.all %}
-                                    <a href="{% url 'tagged' tag.slug %}"
+                                    <a href="{% url 'news_tagged' tag.slug %}"
                                        class="mr-1 badge badge-info">#{{ tag }}</a>
                                 {% endfor %}
                             </div>

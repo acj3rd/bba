@@ -411,3 +411,8 @@ class SingleOccurrenceForm(forms.ModelForm):
         fields = "__all__"
 
 
+class SearchForm(forms.Form):
+    """
+    Form to handle search queries
+    """
+    query = forms.CharField(max_length=100)

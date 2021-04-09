@@ -3,6 +3,38 @@
 <script>
     window.console = window.console || function (t) {
     };
+
+$(function(){
+
+var appendthis =  ("<div class='modal-overlay js-modal-close'></div>");
+
+	$('a[data-modal-id]').click(function(e) {
+		e.preventDefault();
+    $("body").append(appendthis);
+    $(".modal-overlay").fadeTo(500, 0.7);
+    //$(".js-modalbox").fadeIn(500);
+		var modalBox = $(this).attr('data-modal-id');
+		$('#'+modalBox).fadeIn($(this).data());
+	});
+
+
+$(".js-modal-close, .modal-overlay").click(function() {
+    $(".modal-box, .modal-overlay").fadeOut(500, function() {
+        $(".modal-overlay").remove();
+    });
+
+});
+
+$(window).resize(function() {
+    $(".modal-box").css({
+        top: ($(window).height() - $(".modal-box").outerHeight()) / 2,
+        left: ($(window).width() - $(".modal-box").outerWidth()) / 2
+    });
+});
+
+$(window).resize();
+
+});
 </script>
 
 <script>
@@ -11,38 +43,76 @@
     }
 </script>
 
+<script>
+    // Form validation
+    function validate() {
+        // prevent search submissions on page is reloaded
+        if ( document.readyState === "complete") {
+            alert("documentloaded!!!)");
+            return true;
+        }
+        else {
+            alert("NOT LOADED)");
+            return false;
+        }
+    }
+</script>
+
+<div id="popup" class="modal-box">
+  <header>
+    <a href="#" class="js-modal-close close">×</a>
+    <h4>Better Bay Alliance Search</h4>
+  </header>
+  <div class="modal-body">
+      <form method="post" action="{% url 'bba-dosearch' %}" accept-charset="utf-8">
+          {% csrf_token %}
+          <h4><label for="search_field">Search Term:</label></h4><br>
+          <input class="myPleft" type="text" id="search_field" name="search_field" value="Doe"><br><br>
+          <input class="myP" type="submit" value="Submit">
+      </form>
+  </div>
+  <footer>
+    <a href="#" class="js-modal-close">Close</a>
+  </footer>
+</div>
+
+
 <nav class="nav">
     <div class="container">
-        <div class="logo">
-            <a href="{% url 'index' %}"><img src="{% static 'images/BBA-Logo.png' %}" alt="BBA Logo"
-                             style="width:75px;height:75px;"/>
-                Better Bay Alliance</a>
+        <div class="Scriptcontent">
+            <div class="logo">
+                <a href="{% url 'index' %}"><img src="{% static 'images/BBA-Logo.png' %}" alt="BBA Logo"
+                                 style="width:75px;height:75px;"/>
+                    Better Bay Alliance</a>
+            </div>
+            <div id="mainListDiv" class="main_list">
+                <ul class="navlinks">
+                    <li><a href="{% url 'bba-news' %}">News</a></li>
+                    <li><a href="{% url 'bba-ror' %}">Rules of Road</a></li>
+                    <li><a href="{% url 'bba-monthly-view' current_datetime.year current_datetime.month %}">Calendar</a>
+                    </li>
+
+
+                    <li><a href="{% url 'bba-about' %}">About</a></li>
+                    {% if user.is_authenticated %}
+                        <p class="navbar-text"></p>
+                        <li><a class="bba-top-right-menu" href="{% url 'logout' %}">Log Out</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Log In</a></li>
+                    {% endif %}
+                     <li>
+                        <a class="bba-top-right-menu" href="#" data-modal-id="popup">
+                            <svg class="mk-svg-icon" data-name="mk-icon-search" data-cacheid="icon-605128897bf66"
+                                 style=" height:16px; width: 14.857142857143px; " xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 1664 1792">
+                                <path d="M1152 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"></path>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div id="mainListDiv" class="main_list">
-            <ul class="navlinks">
-                <li><a href="{% url 'bba-news' %}">News</a></li>
-                <li><a href="{% url 'bba-monthly-view' current_datetime.year current_datetime.month %}">Calendar</a>
-                </li>
-                <li><a href="about.html">About</a></li>
-                {% if user.is_authenticated %}
-                    <p class="navbar-text"></p>
-                    <li><a class="bba-top-right-menu" href="{% url 'logout' %}">Hi {{ user.first_name }}! &nbsp;Log
-                        Out</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Log In</a></li>
-                {% endif %}
-                <li>
-                    <a class="bba-top-right-menu" href="{% url 'bba-search' %}">
-                        <svg class="mk-svg-icon" data-name="mk-icon-search" data-cacheid="icon-605128897bf66"
-                             style=" height:16px; width: 14.857142857143px; " xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 1664 1792">
-                            <path d="M1152 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"></path>
-                        </svg>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <span class="navTrigger">
+            <span class="navTrigger">
             <i></i>
             <i></i>
             <i></i>

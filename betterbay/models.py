@@ -66,6 +66,7 @@ class Event(models.Model):
     """
     title = models.CharField(_('title'), max_length=32)
     description = models.CharField(_('description'), max_length=100)
+    location = models.CharField(_('location'), default='', max_length=100)
     event_type = models.ForeignKey(
         EventType,
         verbose_name=_('event type'),
