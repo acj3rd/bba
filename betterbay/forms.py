@@ -416,3 +416,19 @@ class SearchForm(forms.Form):
     Form to handle search queries
     """
     query = forms.CharField(max_length=100)
+
+
+class SearchNewsForm(forms.Form):
+    """
+    Form used to render search results from the News table
+    """
+    title = forms.CharField(max_length=200)
+    author = forms.CharField(max_length=200)
+    content = forms.TimeField()
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        model = News
+        fields = ['title', 'author', 'content']

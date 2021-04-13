@@ -8,7 +8,7 @@
 
 {% block content %}
 
-    <section class="home" style="background-image: url('{% static "images/volvo_start2.png"%}')">
+    <section class="home" style="background-image: url('{% static "images/aerial_bay.jpg"%}')">
     </section>
     <div style="height: 1000px">
    <div class="container pt-5">
@@ -20,6 +20,7 @@
                             <div class="col p-4 d-flex flex-column position-static">
                                 <h3 class="my-1"><a
                                         href="{% url 'news_detail' news_article.slug %}">{{ news_article.title }}</a></h3>
+                                <h4>Author: {{ news_article.author }}</h4>
                                 <p class="myP">
                                     <span>{{ news_article.content|truncatechars:100 }}</span>
                                 </p>

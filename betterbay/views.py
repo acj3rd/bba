@@ -12,8 +12,12 @@ from django.contrib import auth
 from django.apps import apps
 from django.db.models import Q
 
+from django.utils.safestring import mark_safe
+
 from betterbay.models import News as NewsDB
 from taggit.models import Tag
+
+from .forms import News as NewsForm
 
 logger = logging.getLogger(__name__)
 
@@ -48,8 +52,25 @@ def dosearch(request):
     """Handle the POST for search. """
     search_value = request.POST['search_field']
 
+    news_results = []
+
     search_model_results = get_news_search(search_value)
-    return render(request, 'search_results.html')
+
+    # highlight search term in results
+    for search_model in search_model_results:
+        model_fields = search_model._meta.get_fields()
+        for model_field in model_fields:
+            item_field_value = getattr(search_model, model_field.name)
+            if type(item_field_value) == str:
+                if search_value in item_field_value:
+                    highlighted_search_value = '<mark>%s</mark>' % (search_value,)
+                    item_field_value = item_field_value.replace(search_value, highlighted_search_value)
+                    search_model.__setattr__(model_field.name, mark_safe(item_field_value))
+                    i = 0
+
+
+    return render(request, 'search_results.html', {'search_term': search_value,
+                                                   'search_results': search_model_results})
 
 
 def dosearch_news(request):

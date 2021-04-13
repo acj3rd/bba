@@ -12,6 +12,11 @@ body {
 /*-- Inspiration taken from abdo steif -->
 /* --> https://codepen.io/abdosteif/pen/bRoyMb?editors=1100*/
 
+mark {
+  background-color: yellow;
+  color: black;
+}
+
 /* Navbar section */
 
 .nav {
@@ -76,6 +81,9 @@ body {
     font-size: 12px;
 }
 
+#search_magnifier .mk-svg-icon {
+    fill: white !important;
+}
 /* Home section */
 
 .home {

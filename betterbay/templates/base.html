@@ -19,4 +19,19 @@
 {% block top_nav %}{% endblock top_nav %}
 {% block content %}{% endblock content %}
 </body>
+<footer>
+<!-- Function used to shrink nav bar removing paddings and adding black background -->
+    <script>
+        $(window).scroll(function() {
+            if ($(document).scrollTop() > 50) {
+                $('.nav').addClass('affix');
+                console.log("OK");
+            } else {
+                $('.nav').removeClass('affix');
+            }
+        });
+    </script>
+
+    {% block footer %} {% endblock footer %}
+</footer>
 </html>
