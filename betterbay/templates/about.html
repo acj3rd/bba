@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block top_nav %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% include 'nav_template.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <section class="home" style="background-image: url('{% static "images/volvo_start2.png" %}')">
+    </section>About BBA
+    <div style="height: 1000px">
+    <div class="container pt-5">
+    </div>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script>
+        window.console = window.console || function (t) {
+        };
+    </script>
+
+    About us here
+
+
+    <script>
+        if (document.location.search.match(/type=embed/gi)) {
+            window.parent.postMessage("resize", "*");
+        }
+    </script>
+
+{% endblock content %}

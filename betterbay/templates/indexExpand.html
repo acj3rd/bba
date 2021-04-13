@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>OnClick Search Bar</title>
+
+    <link rel="stylesheet" href="{% static 'css/searchdemo/style.css' %}">
+
+    <!-- partial:index.partial.html -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="{% static 'js/searchdemo/script.js' %}"></script>
+</head>
+<body>
+		
+<header class="ScriptHeader">
+    <div class="rt-container">
+    	<div class="col-rt-12">
+        	<div class="rt-heading">
+            	<h1>OnClick Search Bar</h1>
+                <p>A simple search bar which open when you click on a button. It work like a toggle button.</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section>
+    <div class="rt-container">
+          <div class="col-rt-12">
+              <div class="Scriptcontent">
+              
+              
+    		<div class="navbar">
+              <ul>
+                <li>home</li>
+                <li>work</li>
+                <li>projects</li>
+                <li>about</li>
+                <li>contact</li>
+                <li class="searchbar">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                     <div class="togglesearch">
+                        <input type="text" placeholder=""/>
+                        <input type="button" value="Search"/>
+                    </div>
+                </li>
+              </ul>
+            </div>
+           
+    		</div>
+		</div>
+    </div>
+</section>
+     
+
+	</body>
+</html>

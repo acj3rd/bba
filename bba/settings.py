@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'betterbay.apps.BetterbayConfig',
+    'taggit',
 ]
 
 MIDDLEWARE = [

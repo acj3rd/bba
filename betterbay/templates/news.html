@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block top_nav %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% include 'nav_template.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <section class="home" style="background-image: url('{% static "images/aerial_bay.jpg"%}')">
+    </section>
+    <div style="height: 1000px">
+   <div class="container pt-5">
+        <div class="row mb-2 posts">
+            {% for news_article in news_articles %}
+                <div class="col-md-6">
+                    <div class="cards">
+                        <div class="row no-gutters border rounded  flex-md-row mb-4 shadow-sm h-md-250">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <h3 class="my-1"><a
+                                        href="{% url 'news_detail' news_article.slug %}">{{ news_article.title }}</a></h3>
+                                <h4>Author: {{ news_article.author }}</h4>
+                                <p class="myP">
+                                    <span>{{ news_article.content|truncatechars:100 }}</span>
+                                </p>
+                                <div style="display:flex">
+                                    {% for tag in news_article.tags.all %}
+                                        <a href="{% url 'news_tagged' tag.slug %}"
+                                           class="mr-1 badge badge-info">#{{ tag }}</a>
+                                    {% endfor %}
+                                </div>
+                                <p class="mb-auto">{{ news_article.description }}</p>
+                                <p class="mb-auto text-muted">{{ news_article.published }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <p>Common Tags:
+            {% for mt in common_tags %}
+                <a href="#" class="badge badge-success">{{ mt }}</a>
+            {% endfor %}
+        </p>
+    </div>
+    </div>
+
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+
+
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+ {% endblock content %}
